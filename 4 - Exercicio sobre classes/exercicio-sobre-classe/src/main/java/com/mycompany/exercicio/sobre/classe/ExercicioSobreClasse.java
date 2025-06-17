@@ -35,45 +35,14 @@ Siga as seguintes regras para implementação
 
 import java.util.Scanner;
 import classes.Pet;
+import classes.petMachine;
 
 public class ExercicioSobreClasse {
+    private final static Scanner scanner = new Scanner(System.in);
+    private final static petMachine PetMachine = new petMachine();
 
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Qual opcao? [e-1][e-2][e-3]");
-        String op = scanner.next();
-
-        ExercicioSobreClasse exercicio = new ExercicioSobreClasse(); // cria instância
-
-        switch (op) {
-            case "e-1":
-                exercicio.Exer1();
-                break;
-            case "e-2":
-                exercicio.Exer2();
-                break;
-            case "e-3":
-                exercicio.Exer3();
-                break;
-            default:
-                System.out.println("Opção inválida");
-                break;
-        }
-        
-        scanner.close(); // boa prática
-    }
-
-    public void Exer1() {
-        System.out.println("exer-1");
-    }
-
-    public void Exer2() {
-        System.out.println("exer-2");
-    }
-
-    public void Exer3() {
-        Scanner scanner = new Scanner(System.in);
-        var option = -1;
+       var option = -1;
         do{
             System.err.println("===Escolha uma das opcoes===");
             System.err.println("1 - Dar banho no pet");
@@ -87,8 +56,53 @@ public class ExercicioSobreClasse {
             System.err.println("9 - Limpar a maquina");
             System.err.println("0 - Sair");
             option = scanner.nextInt();
-        }while(option != 0);
-        
-        //Incompleto, seguir no minuto 33
+            
+            switch(option){
+                case 1 -> PetMachine.takeAShower();
+                case 2 -> setWater();
+                case 3 -> setShampo();
+                case 4 -> verifyWater();
+                case 5 -> verifyShampo();
+                case 6 -> checkIfHasPetInMachine();
+                case 7 -> setPetInPetMachine();
+                case 8 -> PetMachine.removePet();
+                case 9 -> PetMachine.wash();
+                case 0 -> System.exit(0);
+                default -> System.out.println("Opcao invalida!");
+            }
+        }while(option != 0); 
+    }
+    
+    public static void setShampo(){
+        PetMachine.addShampo();
+    }
+    
+    public static void setWater(){
+        PetMachine.addWater();
+    }
+    
+    public static void verifyWater(){
+        var amount = PetMachine.getWater();
+        System.out.println("A maquina esta com litros de water: "+amount);
+    }
+    
+    public static void verifyShampo(){
+        var amount = PetMachine.getShampo();
+        System.out.println("A maquina esta com litros de shampo: "+amount);
+    }
+    
+    public static void checkIfHasPetInMachine(){
+        var hasPet = PetMachine.hasPet();
+        System.out.println(hasPet ?"Tem pet na maquina" : "Nao tem pet na maquina");
+    }
+    
+    public static void setPetInPetMachine(){
+        var name = "";
+        while(name == null || name.isEmpty()){
+            System.out.println("Informe o nome do pet: ");
+            name = scanner.next();
+        }
+        var pet = new Pet(name);
+        PetMachine.setPet(pet);
     }
 }

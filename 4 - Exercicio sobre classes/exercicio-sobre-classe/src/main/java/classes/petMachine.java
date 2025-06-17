@@ -9,9 +9,9 @@ package classes;
  * @author Pichau
  */
 public class petMachine {
-    private boolean clean;
-    private int water;
-    private int shampo;
+    private boolean clean = true;
+    private int water = 30;
+    private int shampo = 10;
     private Pet pet;
     
     public void takeAShower(){
